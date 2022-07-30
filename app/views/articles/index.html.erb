@@ -1,7 +1,8 @@
-<h1>Статьи</h1>
+<h1><%= t('articles.index.title') %></h1>
+Количество статей: <%= Article.public_count %>
 
-<% @articles.each do |article| %>
-  <h2><%= article.title %></h2>
-<% end %>
+<section id='articles'>
+  <%= render @articles %>
+</section>
 
 
