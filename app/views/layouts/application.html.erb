@@ -11,6 +11,33 @@
   </head>
 
   <body>
+  <div class= "container"> 
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item <%= 'active' if current_page?(root_path) || current_page?(articles_path) %>">
+          <a class="nav-link" href="<%= articles_path %>">Все статьи</a>
+        </li> 
+      </ul>
+</div>
+        <ul class="navbar-nav pull-xs-right">
+        <% if signed_in?%>
+          <li class="nav-item">
+            <%= link_to "Выход", destroy_user_session_path, method: :delete, class: "nav-link" %>
+          </li>
+          <% else%>
+          <li class="nav-item">
+            <%= link_to "Вход", new_user_session_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Регистрация", new_user_registration_path, class: "nav-link" %>
+          </li>
+          <% end%>
+      </ul>
+
+    </nav>
+    <%= render 'include/notification' %>
     <%= yield %>
+</div>
   </body>
 </html>
