@@ -51,3 +51,10 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end
+<<<<<<< Updated upstream
+=======
+
+gem 'devise', '~> 4.8.1'
+gem 'bootstrap', '~> 5.2.0'
+gem 'pundit', '~> 2.2.0'
+>>>>>>> Stashed changes
