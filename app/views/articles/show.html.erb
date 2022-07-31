@@ -7,10 +7,7 @@
         |
         <%= link_to "Изменить", edit_article_path(@article) %>
         |
-        <%= link_to "Удалить", article_path(@article), data: {
-                          turbo_method: :delete,
-                          turbo_confirm: "Вы уверены?"
-                        } %>
+        <%= link_to "Удалить", article_path(@article), method: :delete, data: { confirm: "Вы уверены?"} %>
         <% end %>            
       </small>
   </div>

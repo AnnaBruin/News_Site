@@ -1,5 +1,8 @@
 class ArticlesController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_article!
+  after_action :verify_authorized
 
   def index
     @articles = Article.all
@@ -18,7 +21,7 @@ class ArticlesController < ApplicationController
     if @article.save
       redirect_to @article
     else
-      render :new, status: :unprocessable_entity
+      render :new
     end
   end
 
@@ -29,7 +32,7 @@ class ArticlesController < ApplicationController
     if @article.update(article_params)
       redirect_to @article
     else
-      render :edit, status: :unprocessable_entity
+      render :edit
     end
   end
 
@@ -48,4 +51,7 @@ class ArticlesController < ApplicationController
     params.require(:article).permit(:title, :body, :summary, :status)
   end
 
+  def authorize_article!
+    authorize(@article || Article)
+  end
 end
