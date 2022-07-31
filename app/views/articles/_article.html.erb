@@ -1,17 +1,9 @@
+<% if article.status == 'public' || signed_in?%>
      <div class="post">
         <div class="post-head">
-            <h2><%= link_to article.title, article %></h2>
+              <h2><%= link_to article.title, article %></h2>
             <small>
               <time> <%= article.created_at.to_date.strftime("%d %B, %Y") %></time>
-              <% if signed_in?%>
-              |
-              <%= link_to "Изменить", edit_article_path(article) %>
-              |
-              <%= link_to "Удалить", article_path(article), data: {
-                                turbo_method: :delete,
-                                turbo_confirm: "Вы уверены?"
-                              } %>
-              <% end %>
             </small>
         </div> 
         
@@ -20,5 +12,31 @@
             <%= article.summary %>
           </div>
         </div>
-
       </div>
+      <% elsif !signed_in?%>
+        <% if article.status == 'only_title'%>
+          <div class="post">
+            <div class="post-head">
+              <h2><%= article.title %></h2>
+              <small>
+                <time> <%= article.created_at.to_date.strftime("%d %B, %Y") %></time>
+              </small>
+            </div> 
+          </div>
+          <% elsif article.status == 'title_summary'%>
+            <div class="post">
+              <div class="post-head">
+                <h2><%=article.title%></h2>
+                <small>
+                  <time> <%= article.created_at.to_date.strftime("%d %B, %Y") %></time>
+                </small>
+              </div> 
+          
+              <div class="post-summary"> 
+                <div class="clearfix"> 
+                  <%= article.summary %>
+                </div>
+              </div>
+            </div>
+        <% end %>
+<% end %>
