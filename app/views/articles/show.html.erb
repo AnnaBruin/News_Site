@@ -1,14 +1,23 @@
+<% if signed_in? %>
+<% if (current_user.correspondent? || current_user.editor?) && @article.processing_status != 'ready'%>
+<h1><% @article.processing_status %>
+<% end %>
+<% end %>
 <div class="post">
   <div class="post-head">
     <h1><%= @article.title%></h1>
       <small>
         <time> <%= @article.created_at.to_date.strftime("%d %B, %Y") %></time>
-        <% if signed_in?%>
+        <% if signed_in? %>
+        <% if (current_user.correspondent? && @article.processing_status != 'ready') || current_user.editor?%>
         |
         <%= link_to "Изменить", edit_article_path(@article) %>
+        <% end %> 
+        <% if current_user.admin? || current_user.editor?%>
         |
-        <%= link_to "Удалить", article_path(@article), method: :delete, data: { confirm: "Вы уверены?"} %>
-        <% end %>            
+        <%= link_to "Удалить", article_path(@article), method: :delete, data: { confirm: "Вы уверены?"} %> 
+        <% end %>  
+        <% end %> 
       </small>
   </div>
   <div class="post-body"> 

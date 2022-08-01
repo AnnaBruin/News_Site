@@ -15,7 +15,7 @@
  */
  @import "bootstrap";
 
- .post{
+.post{
     margin-bottom: 1em;
     padding: 1em 0;
     border-bottom: 1px solid lightblue;
@@ -67,3 +67,8 @@ h1, h2{
     font-size: 1.8em;
 }
 
+.not-ready-post{
+    margin-bottom: 1em;
+    padding: 1em 0;
+    border-bottom: 3px solid red;
+}
