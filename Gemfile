@@ -55,4 +55,9 @@ end
 gem 'devise', '~> 4.8.1'
 gem 'bootstrap', '~> 5.2.0'
 gem 'pundit', '~> 2.2.0'
+<<<<<<< Updated upstream
+=======
+gem 'carrierwave', '~> 2.0'
+gem "mini_magick", '~> 4.11.0'
+>>>>>>> Stashed changes
 
