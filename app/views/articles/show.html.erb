@@ -1,15 +1,14 @@
+<div class="post">
 <% if signed_in? %>
 <% if (current_user.correspondent? || current_user.editor?) && @article.processing_status != 'ready'%>
-<h1><% @article.processing_status %>
+<h1><%= @article.processing_status %></h1>
 <% end %>
 <% end %>
-<div class="post">
-  <div class="post-head">
     <h1><%= @article.title%></h1>
       <small>
         <time> <%= @article.created_at.to_date.strftime("%d %B, %Y") %></time>
         <% if signed_in? %>
-        <% if (current_user.correspondent? && @article.processing_status != 'ready') || current_user.editor?%>
+        <% if (current_user.correspondent? || current_user.editor?) && @article.processing_status != 'ready'%>
         |
         <%= link_to "Изменить", edit_article_path(@article) %>
         <% end %> 
@@ -19,8 +18,12 @@
         <% end %>  
         <% end %> 
       </small>
-  </div>
   <div class="post-body"> 
     <%= @article.body %>
   </div>
+  <% if signed_in? %>
+    <% if (current_user.correspondent? || current_user.editor?) && @article.processing_status != 'ready' && @article.edit_comment != nil%>
+      <font size="5" color="red" face="Arial">Комментарий для редактирования: <%= @article.edit_comment %></font>
+    <% end %>
+  <% end %>
 </div>

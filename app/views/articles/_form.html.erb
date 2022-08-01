@@ -10,20 +10,29 @@
 <% end %>
 
 <%= form_for @article, html: {multipart: true} do |form| %>
-    <div class="form-group">
-      <%= form.label :title %>
-      <%= form.text_field :title, class: 'form-control' %>
-    </div>
- 
-    <div class="form-group">
-      <%= form.label :summary %>
-      <%= form.text_area :summary, class: 'form-control' %>
-    </div>
+    <% if current_user.correspondent? %>
+      <div class="form-group">
+        <%= form.label :title %>
+        <%= form.text_field :title, class: 'form-control' %>
+      </div>
+  
+      <div class="form-group">
+        <%= form.label :summary %>
+        <%= form.text_area :summary, class: 'form-control' %>
+      </div>
 
-    <div class="form-group">
-      <%= form.label :body %>
-      <%= form.rich_text_area :body, class: 'form-control' %>
-    </div>
+      <div class="form-group">
+        <%= form.label :body %>
+        <%= form.rich_text_area :body, class: 'form-control' %>
+      </div>
+    <% end %>
+
+    <% if current_user.editor? %>
+      <div class="form-group">
+        <%= form.label :edit_comment %>
+        <%= form.text_area :edit_comment, class: 'form-control' %>
+      </div>
+    <% end %>
   
     <div>
       <%= form.label :status %><br>
@@ -32,7 +41,11 @@
 
     <div>
       <%= form.label :processing_status %><br>
-      <%= form.select :processing_status, ['new', 'edit', 'ready']%>
+      <% if current_user.editor? %>
+      <%= form.select :processing_status, ['edit', 'ready']%>
+      <% elsif current_user.correspondent? %>
+      <%= form.select :processing_status, ['new']%>
+      <%end%>
     </div>
 
     <div>
