@@ -4,11 +4,11 @@ class ArticlePolicy < ApplicationPolicy
     end
     
     def update?
-        user.correspondent?
+        user.correspondent? || user.editor?
     end
     
     def destroy?
-        user.admin?
+        user.admin? || user.editor?
     end   
 
     def index?

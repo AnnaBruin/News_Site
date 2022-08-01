@@ -199,6 +199,8 @@ GEM
       sprockets (>= 3.0.0)
     thor (1.2.1)
     tilt (2.0.11)
+    trix-rails (2.4.0)
+      rails (> 4.1)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
@@ -247,6 +249,7 @@ DEPENDENCIES
   sass-rails (>= 6)
   selenium-webdriver (>= 4.0.0.rc1)
   spring
+  trix-rails
   turbolinks (~> 5)
   web-console (>= 4.1.0)
   webdrivers

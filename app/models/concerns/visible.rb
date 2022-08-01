@@ -1,15 +1,15 @@
 module Visible
     extend ActiveSupport::Concern
   
-    VALID_STATUSES = ['public', 'only_title', 'title_summary', 'private']
+    VALID_PROCESSING_STATUSES = ['new', 'edit', 'ready']
   
     included do
-      validates :status, inclusion: { in: VALID_STATUSES }
+      validates :processing_status, inclusion: { in: VALID_PROCESSING_STATUSES }
     end
   
     class_methods do
       def public_count
-        where(status: 'public').count
+        where(processing_status: 'ready').count
       end
     end
   
