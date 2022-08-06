@@ -9,6 +9,7 @@
         
         <div class="post-summary"> 
           <div class="clearfix"> 
+            <%= image_tag article.image.url(:thumb), class: 'img-thumbnail thumb' if article.image? %>
             <%= article.summary %>
           </div>
         </div>
@@ -30,6 +31,7 @@
           
               <div class="post-summary"> 
                 <div class="clearfix"> 
+                  <%= image_tag article.image.url(:thumb), class: 'img-thumbnail thumb' if article.image? %>
                   <%= article.summary %>
                 </div>
               </div>

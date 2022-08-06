@@ -19,6 +19,7 @@
         <% end %> 
       </small>
   <div class="post-body"> 
+    <%= image_tag @article.image.url(:large), class: 'img-show' if @article.image? %>
     <%= @article.body %>
   </div>
   <% if signed_in? %>
