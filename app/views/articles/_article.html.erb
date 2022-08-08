@@ -1,4 +1,44 @@
-<%= render "not_ready_article", article: article %>
+<% if signed_in? %>
+<% if article.processing_status == 'new' && (current_user.editor? || current_user.admin?)%>
+    <div class="not-ready-post">
+        <h2><%= link_to article.title, article %></h2>
+        <small>
+        <time> <%= article.created_at.to_date.strftime("%d %B, %Y") %></time>
+        </small>
+
+        <div class="post-summary"> 
+            <div class="clearfix"> 
+                <%= image_tag article.image.url(:thumb), class: 'img-thumbnail thumb' if article.image? %>
+                <%= article.summary %>
+            </div>
+        </div>
+
+        <div class="footer-summary"> 
+          <%= raw article.tags.map(&:name).map{ |t| link_to t, tag_path(t), class: "btn btn-outline-info"}.join(' ') %>
+        </div>
+    </div>
+<% end %>
+
+<% if article.processing_status == 'edit' && (current_user.correspondent? || current_user.admin?)%>
+    <div class="not-ready-post">
+        <h2><%= link_to article.title, article %></h2>
+        <small>
+        <time> <%= article.created_at.to_date.strftime("%d %B, %Y") %></time>
+        </small>
+
+        <div class="post-summary"> 
+            <div class="clearfix"> 
+                <%= image_tag article.image.url(:thumb), class: 'img-thumbnail thumb' if article.image? %>
+                <%= article.summary %>
+            </div>
+        </div>
+
+        <div class="footer-summary"> 
+          <%= raw article.tags.map(&:name).map{ |t| link_to t, tag_path(t), class: "btn btn-outline-info"}.join(' ') %>
+        </div>
+    </div>
+<% end %>
+<% end %>
 <% if article.processing_status == 'ready' %>
 <% if article.status == 'public' || signed_in?%>
      <div class="post">
@@ -12,6 +52,10 @@
             <%= image_tag article.image.url(:thumb), class: 'img-thumbnail thumb' if article.image? %>
             <%= article.summary %>
           </div>
+        </div>
+
+        <div class="footer-summary"> 
+          <%= raw article.tags.map(&:name).map{ |t| link_to t, tag_path(t), class: "btn btn-outline-info"}.join(' ') %>
         </div>
       </div>
       <% elsif !signed_in?%>
@@ -35,8 +79,14 @@
                   <%= article.summary %>
                 </div>
               </div>
+
+              <div class="footer-summary"> 
+                <%= raw article.tags.map(&:name).map{ |t| link_to t, tag_path(t), class: "btn btn-outline-info"}.join(' ') %>
+              </div>
             </div>
         <% end %>
 <% end %>
 <% end %>
+
+
 

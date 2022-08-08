@@ -1,0 +1,19 @@
+ru:
+  activerecord:
+    models:
+      article: 'Статья'
+    attributes:
+      article:
+        title: 'Название'
+        summary: 'Краткое описание'
+        body: 'Содержание'
+        all_tags: 'Теги'
+        status: 'Статус:'
+        processing_status: 'Стадия обработки статьи:'
+      category:
+        name: 'Название'
+        parent_id: 'Категория родитель'
+    errors: 
+      messages:
+        blank: 'не может быть пустым'
+        too_short: 'должно быть не меньше 10 символов'
